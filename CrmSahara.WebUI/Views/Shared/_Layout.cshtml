@@ -4,17 +4,31 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - CrmSahara.WebUI</title>
-    <link rel="stylesheet" href="lib/materialize/dist/css/materialize.min.css"/>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/materialize/dist/js/materialize.js"></script>
+    <link rel="stylesheet" href="lib/materialize/dist/css/materialize.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-<nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Sahara</a>
-    </div>
-</nav>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Sahara</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="side-nav fixed" id="mobile-demo">
+                <li><h5 style="color: black;padding-left: 15px">Użytkownicy</h5></li>
+                <li><a href="sass.html">Sass</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 <div class="container body-content">
     @RenderBody()
 </div>
 @RenderSection("Scripts", false)
+<script>
+    $(".button-collapse").sideNav();
+</script>
 </body>
 </html>

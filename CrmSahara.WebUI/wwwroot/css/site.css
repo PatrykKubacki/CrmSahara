@@ -1,5 +1,8 @@
-﻿body {
-    padding-top: 50px;
+﻿ html {
+     font-family: GillSans, Calibri, Trebuchet, sans-serif;
+ }
+body {
+   /* padding-top: 50px;*/
     padding-bottom: 20px;
 }
 
