@@ -2,9 +2,15 @@
      font-family: GillSans, Calibri, Trebuchet, sans-serif;
  }
 body {
-   /* padding-top: 50px;*/
-    padding-bottom: 20px;
+   /* padding-top: 50px;
+    padding-bottom: 20px;*/
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+ main {
+     flex: 1 0 auto;
+ }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -35,4 +41,12 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+ header, main, footer {
+     padding-left: 300px;
+ }
+
+@media only screen and (max-width : 992px) {
+    header, main, footer { padding-left: 0; }
 }

@@ -1,34 +1,46 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CrmSahara.WebUI</title>
+    <link rel="stylesheet" href="~/lib/materialize/dist/css/materialize.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="~/css/site.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/materialize/dist/js/materialize.js"></script>
-    <link rel="stylesheet" href="lib/materialize/dist/css/materialize.css"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-<header>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">Sahara</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="side-nav fixed" id="mobile-demo">
-                <li><h5 style="color: black;padding-left: 15px">Użytkownicy</h5></li>
-                <li><a href="sass.html">Sass</a></li>
-            </ul>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">Sahara</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="side-nav fixed" id="mobile-demo">
+                    <li><h5 style="color: black;padding-left: 15px">Użytkownicy</h5></li>
+                    @await Component.InvokeAsync("UserNavBar")
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            @RenderBody()
         </div>
-    </nav>
-</header>
-<div class="container body-content">
-    @RenderBody()
-</div>
-@RenderSection("Scripts", false)
-<script>
-    $(".button-collapse").sideNav();
-</script>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 Copyright Kubacki
+            </div>
+        </div>
+    </footer>
+    <script>
+        $(".button-collapse").sideNav();
+    </script>
 </body>
 </html>

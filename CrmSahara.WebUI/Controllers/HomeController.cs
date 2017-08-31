@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using CrmSahara.Domain.Repositories.Abstract;
 using CrmSahara.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +7,16 @@ namespace CrmSahara.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ITaskRepository _repository;
+
+        public HomeController(ITaskRepository repository)
         {
-            return View();
+            _repository = repository;
+        }
+
+        public IActionResult Index(int? id)
+        {
+            return View(id == null ? _repository.GetAll() : _repository.GetForUser(id.Value));
         }
 
         public IActionResult Error()

@@ -1,0 +1,18 @@
+﻿@using System.Collections.Generic
+@using CrmSahara.Domain.Data
+@model IEnumerable<User>
+    
+<li>
+    <a class="btn btn-block pulse"
+       asp-controller="Home" asp-action="Index" asp-route-id="">
+        Wszystkie zadania 
+    </a>
+</li>
+@foreach (var user in Model)
+{
+    <li class="@(user.Id.ToString() == ViewBag.SelectedUser ? "active": "")">
+            <a asp-controller="Home" asp-action="Index" asp-route-id="@user.Id" >
+                @($"{user.FirstName} {user.LastName}")
+            </a>
+    </li>
+}
