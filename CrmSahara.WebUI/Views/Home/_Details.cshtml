@@ -1,0 +1,7 @@
+﻿@model CrmSahara.Domain.Data.TaskItem
+
+
+<h4>@Model.Name</h4>
+<h6>Start: <b>@Model.StartAt.ToShortDateString()</b> Koniec: <b>@Model.EndAt.ToShortDateString()</b></h6>
+<h6>Priorytet: @Model.Priority.Name</h6>
+<p>@Model.Description</p>

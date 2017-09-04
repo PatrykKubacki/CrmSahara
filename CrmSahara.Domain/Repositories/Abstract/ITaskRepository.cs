@@ -13,5 +13,7 @@ namespace CrmSahara.Domain.Repositories.Abstract
 
         TaskItem Get(int id);
 
+        void Save(TaskItem item);
+
     }
 }

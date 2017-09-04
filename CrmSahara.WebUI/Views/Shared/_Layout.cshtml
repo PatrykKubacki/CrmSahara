@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link href="~/css/site.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     <script src="~/lib/materialize/dist/js/materialize.js"></script>
 </head>
 <body>
@@ -39,8 +42,11 @@
             </div>
         </div>
     </footer>
-    <script>
-        $(".button-collapse").sideNav();
+   <script>
+        $(document).ready(function () {
+            $(".button-collapse").sideNav();
+            $('.modal').modal({});
+        });
     </script>
 </body>
 </html>

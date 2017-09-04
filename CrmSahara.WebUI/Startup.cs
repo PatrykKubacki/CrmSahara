@@ -20,6 +20,7 @@ namespace CrmSahara.WebUI
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IPriorityRepository, PriorityRepository>();
             services.AddMvc();
         }
 

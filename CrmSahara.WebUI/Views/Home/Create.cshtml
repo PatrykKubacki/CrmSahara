@@ -1,0 +1,64 @@
+﻿@model CrmSahara.Domain.Data.TaskItem
+    
+    <form asp-controller="Home" asp-action="Create" method="post" class="col s12">
+        <div class="modal-content">
+            <div class="row">
+
+                <div class="row">
+                    <div class="input-field col s2">
+                        <h4>Zadanie</h4>
+                    </div>
+                    <div class="input-field col s10">
+                        <input asp-for="Name" type="text" class="validate" />
+                        <label asp-for="Name"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea asp-for="Description" type="text" class="materialize-textarea"></textarea>
+                        <label asp-for="Description"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select asp-for="UserId" asp-items="@ViewBag.Users">
+                            <option value="" disabled selected>Wybierz użytkownika</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s6">
+                        <select asp-for="PriorityId" asp-items="@ViewBag.Priorities">
+                            <option value="" disabled selected>Wybierz priorytet</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input asp-for="StartAt" type="text" placeholder="Start" class="datepicker" />
+                    </div>
+                    <div class="input-field col s6">
+                        <input asp-for="EndAt" type="text" placeholder="Koniec" class="datepicker" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat " value="Dodaj"/>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Anuluj</a>
+        </div>
+    </form>
+
+<script>
+    $(document).ready(function () {
+        $('.datepicker').pickadate({
+            selectMonths: true, 
+            selectYears: 5,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            format: 'dd/mm/yyyy',
+            closeOnSelect: false
+        });
+        $('select').material_select();
+    });
+</script>

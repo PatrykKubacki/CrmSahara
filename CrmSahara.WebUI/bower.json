@@ -2,12 +2,14 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "materialize": "v0.100.2"
+    "materialize": "v0.100.2",
+    "jquery-ajax-unobtrusive": "jquery.unobtrusive-ajax#v3.2.4",
+    "jquery": "jQuery#2.1.4"
   },
   "resolutions": {
-    "materialize": "v0.100.2"
+    "materialize": "v0.100.2",
+    "jquery": ">= 1.7.2"
   }
 }

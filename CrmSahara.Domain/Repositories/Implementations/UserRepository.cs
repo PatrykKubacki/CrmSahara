@@ -2,13 +2,15 @@
 using System.Linq;
 using CrmSahara.Domain.Data;
 using CrmSahara.Domain.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrmSahara.Domain.Repositories.Implementations
 {
     public class UserRepository : IUserRepository
     {
         Entities _context = new Entities();
-        public IEnumerable<User> Users => _context.User;
+        public IEnumerable<User> Users => _context.User.Include(u=>u.TaskItem)
+                                                       .Include(u=>u.Group);
 
         public IEnumerable<User> GetAll() => Users;
 
