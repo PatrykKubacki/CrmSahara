@@ -21,6 +21,7 @@ namespace CrmSahara.WebUI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IPriorityRepository, PriorityRepository>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddMvc();
         }
 
@@ -40,6 +41,10 @@ namespace CrmSahara.WebUI
 
             app.UseMvc(routes => 
             {
+                routes.MapRoute(
+                    name: null,
+                    template: "{controller=Home}/{action=Index}/{id?}/{statusId?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

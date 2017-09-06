@@ -56,3 +56,11 @@ body {
     max-height: 85% !important;
     overflow-y: hidden !important;
 }
+
+ .side-nav li.active {
+    background-color: #ee6e73;
+}
+
+.side-nav li.active a {
+    color: white;
+}

@@ -1,0 +1,20 @@
+﻿@using CrmSahara.Domain.Data
+@model IEnumerable<Status>
+
+<div class="col s12">
+    
+    @*TODO All tasks button*@
+
+    @foreach (var status in Model)
+    {
+        <div class="col s3">
+            <a asp-controller="Home" asp-action="Index"
+               asp-route-id="@ViewBag.SelectedUser" asp-route-statusId="@status.Id"
+               class="@(status.Id.ToString() == ViewBag.SelectedStatus
+                            ? "waves-effect btn red"
+                            : "waves-effect waves-teal btn-flat")">
+                @($"{status.Name}")
+            </a>
+        </div>
+    }
+</div>

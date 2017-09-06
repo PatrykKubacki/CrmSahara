@@ -8,6 +8,7 @@ namespace CrmSahara.Domain.Data
     {
         public virtual DbSet<Group> Group { get; set; }
         public virtual DbSet<Priority> Priority { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<TaskItem> TaskItem { get; set; }
         public virtual DbSet<User> User { get; set; }
 
@@ -48,6 +49,19 @@ namespace CrmSahara.Domain.Data
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<TaskItem>(entity =>
             {
                 entity.Property(e => e.Description)
@@ -68,6 +82,11 @@ namespace CrmSahara.Domain.Data
                     .WithMany(p => p.TaskItem)
                     .HasForeignKey(d => d.PriorityId)
                     .HasConstraintName("FK__TaskItem__Priori__44FF419A");
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.TaskItem)
+                    .HasForeignKey(d => d.StatusId)
+                    .HasConstraintName("FK__TaskItem__Status__49C3F6B7");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.TaskItem)

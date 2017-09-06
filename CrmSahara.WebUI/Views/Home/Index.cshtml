@@ -3,9 +3,10 @@
 
 <div class="collection with-header">
     <div class="collection-header">
-      
-        <h4>Zadania
-            @Html.ActionLink("Dodaj", "Create", "Home", null,null,null,null, new {
+        <h4>
+            Zadania
+            @Html.ActionLink("Dodaj", "Create", "Home", null, null, null, null, new
+            {
                 data_ajax = "true",
                 data_ajax_method = "GET",
                 data_ajax_mode = "replace",
@@ -14,20 +15,25 @@
                 data_delay = "50",
                 data_tooltip = "Dodaj nowe zadanie",
                 @class = " waves-effect waves-light btn btn-medium   red tooltipped",
-                onclick= " $('#modal2').modal('open');"
+                onclick = " $('#modal2').modal('open');"
             })
-            
+
         </h4>
-        
+        <div class="row">          
+            @await Component.InvokeAsync("StatusNavTabs")
+        </div>
     </div>
-    @foreach (var item in Model){
-        @Html.ActionLink($"Nazwa: {item.Name} Priorytet: {item.PriorityId}", "Details", "Home", null,null,null,new {id = item.Id}, new {
+   
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink($"Nazwa: {item.Name} Priorytet: {item.PriorityId}", "Details", "Home", null, null, null, new {id = item.Id}, new
+        {
             data_ajax = "true",
             data_ajax_method = "GET",
             data_ajax_mode = "replace",
             data_ajax_update = "#update-container",
             @class = "collection-item",
-            onclick= " $('#modal1').modal('open');"
+            onclick = " $('#modal1').modal('open');"
         })
     }
 </div>
@@ -35,12 +41,11 @@
     <div id="update-add-container"></div>
 </div>
 
-    <div id="modal1" class="modal bottom-sheet">
-        <div class="modal-content">
-            <div id="update-container"></div>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Zamknij</a>
-        </div>
+<div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div id="update-container"></div>
     </div>
-
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Zamknij</a>
+    </div>
+</div>

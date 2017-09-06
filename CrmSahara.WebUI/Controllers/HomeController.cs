@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using CrmSahara.Domain.Data;
 using CrmSahara.Domain.Repositories.Abstract;
 using CrmSahara.WebUI.Models;
@@ -23,8 +24,13 @@ namespace CrmSahara.WebUI.Controllers
             _priorityRepository = priorityRepository;
         }
 
-        public IActionResult Index(int? id)
+        public IActionResult Index(int? id, int? statusId)
         {
+            if (statusId != null)
+                return View(id == null
+                    ? _taskRepository.GetAll().Where(t=>t.StatusId == statusId) 
+                    : _taskRepository.GetForUser(id.Value).Where(t => t.StatusId == statusId));
+
             return View(id == null ? _taskRepository.GetAll() : _taskRepository.GetForUser(id.Value));
         }
 

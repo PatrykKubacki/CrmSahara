@@ -10,9 +10,8 @@ namespace CrmSahara.Domain.Repositories.Implementations
     {
         Entities _context = new Entities();
         public IEnumerable<TaskItem> Tasks => _context.TaskItem.Include(t=>t.User)
-                                                               .Include(t=>t.Priority);
-
-        public IEnumerable<TaskItem> GetAll() => Tasks;
+     
+            public IEnumerable<TaskItem> GetAll() => Tasks;
 
         public IEnumerable<TaskItem> GetForUser(int userId) => Tasks.Where(ti => ti.UserId == userId);
 
