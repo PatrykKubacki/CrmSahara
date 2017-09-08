@@ -2,7 +2,7 @@
 using CrmSahara.Domain.Data;
 using CrmSahara.Domain.Repositories.Abstract;
 
-namespace CrmSahara.Domain.Repositories.Implementations
+namespace CrmSahara.Infrastructure.Repositories
 {
     public class PriorityRepository : IPriorityRepository
     {

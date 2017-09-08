@@ -9,8 +9,9 @@
 </li>
 @foreach (var user in Model)
 {
+   
     <li class="@(user.Id.ToString() == ViewBag.SelectedUser ? "active": "")">
-            <a asp-controller="Home" asp-action="Index" asp-route-id="@user.Id" >
+            <a asp-controller="Home" asp-action="Index" asp-route-id="@user.Id">
                 @($"{user.FirstName} {user.LastName}")
             </a>
     </li>

@@ -6,6 +6,7 @@ namespace CrmSahara.Domain.Data
 {
     public partial class Entities : DbContext
     {
+        public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Group> Group { get; set; }
         public virtual DbSet<Priority> Priority { get; set; }
         public virtual DbSet<Status> Status { get; set; }
@@ -23,6 +24,21 @@ namespace CrmSahara.Domain.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.TaskItem)
+                    .WithMany(p => p.Comment)
+                    .HasForeignKey(d => d.TaskItemId)
+                    .HasConstraintName("FK__Comment__TaskIte__4CA06362");
+            });
+
             modelBuilder.Entity<Group>(entity =>
             {
                 entity.Property(e => e.Description)

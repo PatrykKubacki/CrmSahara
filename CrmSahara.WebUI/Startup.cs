@@ -1,5 +1,6 @@
 ﻿using CrmSahara.Domain.Repositories.Abstract;
-using CrmSahara.Domain.Repositories.Implementations;
+using CrmSahara.Infrastructure.Mappers;
+using CrmSahara.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,12 +10,12 @@ namespace CrmSahara.WebUI
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -22,6 +23,8 @@ namespace CrmSahara.WebUI
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IPriorityRepository, PriorityRepository>();
             services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddMvc();
         }
 

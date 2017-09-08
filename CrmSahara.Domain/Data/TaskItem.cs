@@ -5,6 +5,11 @@ namespace CrmSahara.Domain.Data
 {
     public partial class TaskItem
     {
+        public TaskItem()
+        {
+            Comment = new HashSet<Comment>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -17,5 +22,6 @@ namespace CrmSahara.Domain.Data
         public Priority Priority { get; set; }
         public Status Status { get; set; }
         public User User { get; set; }
+        public ICollection<Comment> Comment { get; set; }
     }
 }

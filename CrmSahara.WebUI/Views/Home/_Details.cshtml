@@ -1,7 +1,31 @@
 ﻿@model CrmSahara.Domain.Data.TaskItem
+<div class="modal-content">
+    <h4>@Model.Name</h4>
+    <h6>Start: <b>@Model.StartAt.ToShortDateString()</b> Koniec: <b>@Model.EndAt.ToShortDateString()</b></h6>
+    <h6>Priorytet: @Model.Priority.Name</h6>
+    <p>@Model.Description</p>
 
-
-<h4>@Model.Name</h4>
-<h6>Start: <b>@Model.StartAt.ToShortDateString()</b> Koniec: <b>@Model.EndAt.ToShortDateString()</b></h6>
-<h6>Priorytet: @Model.Priority.Name</h6>
-<p>@Model.Description</p>
+    <div class="row">
+            @await Component.InvokeAsync("Comments", new {taskItemId = Model.Id})
+        </div>
+    <div class="row">
+        <form class="col s12" asp-controller="Home" asp-action="CreateComment">
+            <input type="hidden" name="taskItemId" value="@Model.Id"/>
+            <div class="row">
+                <div class="input-field col s6 offset-s6">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="description" name="description" class="materialize-textarea" data-length="500"></textarea>
+                    <label for="description">Komentarz</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6 offset-s10">
+                    <button type="submit" class="btn red waves-effect waves-light"><i class="material-icons right">send</i>Dodaj</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Zamknij</a>
+</div>

@@ -4,7 +4,7 @@ using CrmSahara.Domain.Data;
 using CrmSahara.Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrmSahara.Domain.Repositories.Implementations
+namespace CrmSahara.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {

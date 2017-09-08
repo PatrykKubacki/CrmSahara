@@ -1,0 +1,16 @@
+﻿@using CrmSahara.Domain.Data
+@model IEnumerable<Comment>
+
+<ul class="collection">
+    @foreach (var comment in Model)
+    {
+        <li class="collection-item">
+            <div class="row">
+                @comment.Description
+                <br/>
+             <span><i>Wystawiony : @comment.Date Przez: </i></span>   
+            </div>
+        </li>
+    }
+</ul>
+            
