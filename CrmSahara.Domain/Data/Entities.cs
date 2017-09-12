@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CrmSahara.Domain.Data
 {
-    public partial class Entities : DbContext
+    public class Entities : DbContext
     {
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Group> Group { get; set; }
@@ -37,6 +37,11 @@ namespace CrmSahara.Domain.Data
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.TaskItemId)
                     .HasConstraintName("FK__Comment__TaskIte__4CA06362");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Comment)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK__Comment__UserId__5AEE82B9");
             });
 
             modelBuilder.Entity<Group>(entity =>

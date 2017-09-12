@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using CrmSahara.Domain.Data;
 using CrmSahara.Domain.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrmSahara.Infrastructure.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
         Entities _context = new Entities();
-        public IEnumerable<Comment> Comments => _context.Comment;
+        public IEnumerable<Comment> Comments => _context.Comment.Include(c=>c.User)
+                                                                 .Include(c=>c.TaskItem);
 
         public IEnumerable<Comment> GetAll() => Comments;
 

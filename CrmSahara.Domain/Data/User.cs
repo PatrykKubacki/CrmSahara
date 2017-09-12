@@ -7,6 +7,7 @@ namespace CrmSahara.Domain.Data
     {
         public User()
         {
+            Comment = new HashSet<Comment>();
             TaskItem = new HashSet<TaskItem>();
         }
 
@@ -19,6 +20,7 @@ namespace CrmSahara.Domain.Data
         public int? GroupId { get; set; }
 
         public Group Group { get; set; }
+        public ICollection<Comment> Comment { get; set; }
         public ICollection<TaskItem> TaskItem { get; set; }
     }
 }
