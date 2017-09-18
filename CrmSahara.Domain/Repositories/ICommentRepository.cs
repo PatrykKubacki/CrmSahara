@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CrmSahara.Domain.Data;
 
-namespace CrmSahara.Domain.Repositories.Abstract
+namespace CrmSahara.Domain.Repositories
 {
     public interface ICommentRepository
     {
         IEnumerable<Comment> Comments { get; }
 
-        IEnumerable<Comment> GetAll();
+        Task<IEnumerable<Comment>> GetAllAsync();
 
-        IEnumerable<Comment> Get(int taskItemId);
+        Task<IEnumerable<Comment>> GetAsync(int taskItemId);
 
-        void Save(Comment comment);
+        Task SaveAsync(Comment comment);
     }
 }

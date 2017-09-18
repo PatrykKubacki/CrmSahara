@@ -1,4 +1,6 @@
-﻿@model CrmSahara.Domain.Data.TaskItem
+﻿@using CrmSahara.Infrastructure.Dto
+@model TaskItemDto
+
 <div class="modal-content">
     <h4>@Model.Name</h4>
     <h6>Start: <b>@Model.StartAt.ToShortDateString()</b> Koniec: <b>@Model.EndAt.ToShortDateString()</b></h6>

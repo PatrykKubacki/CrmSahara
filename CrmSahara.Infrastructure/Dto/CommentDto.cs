@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CrmSahara.Domain.Data
+namespace CrmSahara.Infrastructure.Dto
 {
-    public class Comment
+    public class CommentDto
     {
         public int Id { get; set; }
         public string Description { get; set; }
@@ -10,7 +10,7 @@ namespace CrmSahara.Domain.Data
         public DateTime Date { get; set; }
         public int? UserId { get; set; }
 
-        public TaskItem TaskItem { get; set; }
-        public User User { get; set; }
+        public TaskItemDto TaskItem { get; set; }
+        public UserDto User { get; set; }
     }
 }

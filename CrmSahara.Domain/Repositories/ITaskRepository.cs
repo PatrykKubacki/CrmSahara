@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CrmSahara.Domain.Data;
 
-namespace CrmSahara.Domain.Repositories.Abstract
+namespace CrmSahara.Domain.Repositories
 {
     public interface ITaskRepository
     {
         IEnumerable<TaskItem> Tasks { get; }
 
-        IEnumerable<TaskItem> GetAll();
+        Task<IEnumerable<TaskItem>> GetAllAsync();
 
-        IEnumerable<TaskItem> GetForUser(int userId);
+	    Task<IEnumerable<TaskItem>> GetForUserAsync(int userId);
 
-        TaskItem Get(int id);
+		Task<IEnumerable<TaskItem>> GetWhenStatusAsync(int statusId);
 
-        void Save(TaskItem item);
+		Task<IEnumerable<TaskItem>> GetAsync(int userId, int statusId);
 
+        Task<TaskItem> GetAsync(int id);
+
+        Task SaveAsync(TaskItem item);
     }
 }

@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CrmSahara.Domain.Data;
 
-
-namespace CrmSahara.Domain.Repositories.Abstract
+namespace CrmSahara.Domain.Repositories
 {
     public interface IUserRepository
     {
         IEnumerable<User> Users { get; }
 
-        IEnumerable<User> GetAll();
+        Task<IEnumerable<User>> GetAllAsync();
 
-        User Get(int id);
+        Task<User> GetAsync(int id);
     }
 }

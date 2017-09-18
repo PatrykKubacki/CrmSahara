@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CrmSahara.Domain.Data
 {
-    public partial class Status
+    public class Status
     {
         public Status()
         {

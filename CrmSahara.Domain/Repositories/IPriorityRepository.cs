@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CrmSahara.Domain.Data;
 
-namespace CrmSahara.Domain.Repositories.Abstract
+namespace CrmSahara.Domain.Repositories
 {
     public interface IPriorityRepository
     {
         IEnumerable<Priority> Priorities { get; }
 
-        IEnumerable<Priority> GetAll();
+        Task<IEnumerable<Priority>> GetAllAsync();
     }
 }

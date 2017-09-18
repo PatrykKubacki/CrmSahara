@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using CrmSahara.Domain.Data;
-using CrmSahara.Domain.Repositories.Abstract;
+using System.Threading.Tasks;
+using CrmSahara.Infrastructure.Dto;
+using CrmSahara.Infrastructure.Services.Abstract;
 using CrmSahara.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,62 +12,62 @@ namespace CrmSahara.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ITaskRepository _taskRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IPriorityRepository _priorityRepository;
-        private readonly ICommentRepository _commentRepository;
+        readonly ITaskService _taskService;
+        readonly IUserService _userService;
+        readonly IPriorityService _priorityService;
+        readonly ICommentService _commentService;
 
-        public HomeController(ITaskRepository taskRepository, 
-                              IUserRepository userRepository, 
-                              IPriorityRepository priorityRepository,
-                              ICommentRepository commentRepository)
-        {
-            _taskRepository = taskRepository;
-            _userRepository = userRepository;
-            _priorityRepository = priorityRepository;
-            _commentRepository = commentRepository;
-        }
+	    public HomeController(ITaskService taskService, IUserService userService, 
+							  IPriorityService priorityService, ICommentService commentService)
+	    {
+		    _taskService = taskService;
+		    _userService = userService;
+		    _priorityService = priorityService;
+		    _commentService = commentService;
+	    }
 
-        public IActionResult Index(int? id, int? statusId)
+
+	    public IActionResult Index(int? id, int? statusId)
         {
             if (statusId != null)
                 return View(id == null
-                    ? _taskRepository.GetAll().Where(t=>t.StatusId == statusId) 
-                    : _taskRepository.GetForUser(id.Value).Where(t => t.StatusId == statusId));
+                    ? _taskService.GetWhenStatusAsync(statusId.Value).Result 
+                    : _taskService.GetAsync(id.Value , statusId.Value).Result);
 
-            return View(id == null ? _taskRepository.GetAll() : _taskRepository.GetForUser(id.Value));
+            return View(id == null ? _taskService.GetAllAsync().Result: _taskService.GetForUserAsync(id.Value).Result);
+	       
         }
 
         public IActionResult Details(int id)
         {
-            var taskItem = _taskRepository.Get(id);
+            var taskItem = _taskService.GetAsync(id).Result;
             return PartialView("_Details", taskItem);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Priorities = new SelectList(_priorityRepository.GetAll(), "Id", "Name");
-            ViewBag.Users = new SelectList(_userRepository.GetAll(), "Id", "UserName");
-            return PartialView(new TaskItem {StartAt = DateTime.Now, EndAt = DateTime.MaxValue});
+            ViewBag.Priorities = new SelectList(_priorityService.GetAllAsync().Result, "Id", "Name");
+            ViewBag.Users = new SelectList(_userService.GetAllAsync().Result, "Id", "UserName");
+            return PartialView(new TaskItemDto {StartAt = DateTime.Now, EndAt = DateTime.MaxValue});
         }
         
         [HttpPost]
-        public IActionResult Create(TaskItem item)
+        public IActionResult Create(TaskItemDto item)
         {
-            _taskRepository.Save(item);
+            _taskService.SaveAsync(item);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult CreateComment(int taskItemId,string description)
         {
-            var comment = new Comment()
+            var comment = new CommentDto
             {
                 TaskItemId = taskItemId,
                 Description = description,
                 Date = DateTime.Now
             };
-            _commentRepository.Save(comment);
+            _commentService.SaveAsync(comment);
             return RedirectToAction("Index");
         }
 

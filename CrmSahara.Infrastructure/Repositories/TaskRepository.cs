@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CrmSahara.Domain.Data;
-using CrmSahara.Domain.Repositories.Abstract;
+using CrmSahara.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrmSahara.Infrastructure.Repositories
@@ -13,13 +14,23 @@ namespace CrmSahara.Infrastructure.Repositories
                                                                .Include(t => t.Priority)
                                                                .Include(t=>t.Comment);
      
-        public IEnumerable<TaskItem> GetAll() => Tasks;
+        public async Task<IEnumerable<TaskItem>> GetAllAsync() 
+			=> await Task.FromResult(Tasks);
 
-        public IEnumerable<TaskItem> GetForUser(int userId) => Tasks.Where(ti => ti.UserId == userId);
+        public async  Task<IEnumerable<TaskItem>> GetForUserAsync(int userId) 
+			=> await Task.FromResult(Tasks.Where(ti => ti.UserId == userId));
 
-        public TaskItem Get(int id) => Tasks.SingleOrDefault(ti=>ti.Id == id);
+	    public async Task<IEnumerable<TaskItem>> GetWhenStatusAsync(int statusId)
+		    => await Task.FromResult(Tasks.Where(t => t.StatusId == statusId));
 
-        public void Save(TaskItem item)
+	    public async Task<IEnumerable<TaskItem>> GetAsync(int userId, int statusId) 
+			=> await Task.FromResult(GetForUserAsync(userId).Result
+															.Intersect(GetWhenStatusAsync(statusId).Result));
+
+		public async Task<TaskItem> GetAsync(int id)
+			=> await Task.FromResult(Tasks.SingleOrDefault(ti=>ti.Id == id));
+
+        public async Task SaveAsync(TaskItem item)
         {
             if (item.Id == 0)
                 _context.TaskItem.Add(item);
@@ -38,6 +49,7 @@ namespace CrmSahara.Infrastructure.Repositories
                 }
             }
             _context.SaveChanges();
+	        await Task.CompletedTask;
         }
     }
 }

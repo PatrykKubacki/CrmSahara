@@ -1,21 +1,21 @@
-﻿using CrmSahara.Domain.Repositories.Abstract;
+﻿using CrmSahara.Infrastructure.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrmSahara.WebUI.Components
 {
     public class UserNavBar : ViewComponent
     {
-        private readonly IUserRepository _repository;
+        readonly IUserService _service;
 
-        public UserNavBar(IUserRepository repository)
-        {
-            _repository = repository;
-        }
+	    public UserNavBar(IUserService service)
+	    {
+		    _service = service;
+	    }
 
-        public IViewComponentResult Invoke()
+	    public IViewComponentResult Invoke()
         {
             ViewBag.SelectedUser = RouteData?.Values["id"];
-            return View(_repository.Users);
+            return View(_service.GetAllAsync().Result);
         }
     }
 }

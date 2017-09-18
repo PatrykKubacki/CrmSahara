@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CrmSahara.Domain.Data
 {
-    public partial class TaskItem
+    public class TaskItem
     {
         public TaskItem()
         {
